@@ -1,0 +1,57 @@
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DatabaseHelper extends SQLiteOpenHelper {
+
+    // Nome del database
+    private static final String NOME_DATABASE = "mio_database";
+    // Nome della tabella
+    private static final String NOME_TABELLA = "mio_tabella";
+    // Nomi delle colonne
+    private static final String COLONNA_ID = "id";
+    private static final String COLONNA_NOME = "nome";
+    private static final String COLONNA_ETA = "eta";
+
+    // Query di creazione della tabella
+    private static final String CREAZIONE_TABELLA =
+            "CREATE TABLE " + NOME_TABELLA + " (" +
+                    COLONNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLONNA_NOME + " TEXT, " +
+                    COLONNA_ETA + " INTEGER)";
+
+    // Costruttore
+    public DatabaseHelper(Context context) {
+        super(context, NOME_DATABASE, null, 1);
+    }
+
+    // Metodo chiamato durante la creazione del database
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(CREAZIONE_TABELLA);
+    }
+
+    // Metodo chiamato durante l'aggiornamento del database
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + NOME_TABELLA);
+        onCreate(db);
+    }
+
+    // Metodo per inserire dati nella tabella
+    public long inserisciDati(String nome, int eta) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLONNA_NOME, nome);
+        contentValues.put(COLONNA_ETA, eta);
+        return db.insert(NOME_TABELLA, null, contentValues);
+    }
+
+    // Metodo per ottenere tutti i dati dalla tabella
+    public Cursor ottieniTuttiIDati() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + NOME_TABELLA, null);
+    }
+}
