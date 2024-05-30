@@ -5,13 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    // Nome del database
-    private static final String NOME_DATABASE = "mio_database";
-    // Nome della tabella
-    private static final String NOME_TABELLA = "mio_tabella";
-    // Nomi delle colonne
-    private static final String COLONNA_ID = "id";
-    private static final String COLONNA_NOME = "nome";
+    // Nome del databas
     private static final String COLONNA_ETA = "eta";
 
     // Query di creazione della tabella
