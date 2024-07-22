@@ -12,14 +12,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREAZIONE_TABELLA =
             "CREATE TABLE " + NOME_TABELLA + " (" +
                     COLONNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COLONNA_NOME + " TEXT, " +
-                    COLONNA_ETA + " INTEGER)";
-
-    // Costruttore
-    public DatabaseHelper(Context context) {
-        super(context, NOME_DATABASE, null, 1);
-    }
-
+         
     // Metodo chiamato durante la creazione del database
     @Override
     public void onCreate(SQLiteDatabase db) {
